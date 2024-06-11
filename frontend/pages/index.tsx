@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Container, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, Card, CardActions, CardContent, Container, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 
 export interface IBook {
@@ -623,8 +623,6 @@ export const useFetchAllBooks = (): IUseFetchAllBooks => {
         ])
     }, []);
 
-    console.log("books: ", books)
-
     return {
         books,
     }
@@ -641,6 +639,7 @@ export default function HomePage() {
                 flexDirection: 'column',
                 alignItems: 'center',
             }}
+            gap={2}
         >
             <Box>
                 <Autocomplete
@@ -653,7 +652,31 @@ export default function HomePage() {
                 />
             </Box>
 
-            <Box></Box>
+            <Box>
+                <Grid container spacing={2}>
+                    {fetchAllBooks.books.map((book, index) => <Grid
+                        key={index}
+                        item
+                        xs={2}
+                    >
+                        <Card>
+                            <CardContent>
+                                <Typography gutterBottom variant="body1" component="div">
+                                    {book.title}
+                                </Typography>
+
+                                <Typography variant="body2" color="text.secondary">
+                                    {`by ${book.author}`}
+                                </Typography>
+                            </CardContent>
+
+                            <CardActions>
+                                <Button size="small">Add</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>)}
+                </Grid>
+            </Box>
         </Box>
     </Container>
 }
