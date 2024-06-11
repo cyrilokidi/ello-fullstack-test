@@ -644,7 +644,23 @@ export default function HomePage() {
             <Box>
                 <Autocomplete
                     sx={{ width: 500 }}
-                    options={[]}
+                    options={fetchAllBooks.books}
+                    getOptionLabel={(book) => book.title}
+                    renderOption={(props, book) => <Box
+                        {...props}
+                        key={book.title + book.author + book.readingLevel}
+                        component="li"
+                        sx={{
+                            '& > img': {
+                                mr: 2,
+                                flexShrink: 0,
+                            }
+                        }}
+                    >
+                        <Typography variant="body1" color="text.primary">
+                            {book.title}
+                        </Typography>
+                    </Box>}
                     renderInput={(params) => <TextField
                         {...params}
                         placeholder="Search..."
