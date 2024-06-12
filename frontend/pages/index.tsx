@@ -1,6 +1,7 @@
 import { Autocomplete, Box, Button, Card, CardActions, CardContent, Container, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { IBook, demoBooks } from "../data";
+import { useApp } from "../contexts/AppContext";
 
 export interface IUseFetchAllBooks {
     books: IBook[];
@@ -24,16 +25,7 @@ export const useFetchAllBooks = (): IUseFetchAllBooks => {
 export default function HomePage() {
     const fetchAllBooks = useFetchAllBooks();
 
-    const [selectedBooks, setSelectedBooks] = React.useState<IBook[]>([]);
-
-    const handleAddBook = (book: IBook) =>
-        setSelectedBooks([
-            ...selectedBooks,
-            book,
-        ]);
-
-    const handleRemoveBook = (book: IBook) =>
-        setSelectedBooks(selectedBooks.filter(({ title, author, readingLevel }) => title !== book.title && author !== book.author && readingLevel !== book.readingLevel));
+    const app = useApp();
 
     return <Container component="main">
         <Box
@@ -91,17 +83,17 @@ export default function HomePage() {
                             </CardContent>
 
                             <CardActions>
-                                {!(selectedBooks.find(({ title, author, readingLevel }) => title === book.title && author === book.author && readingLevel === book.readingLevel))
+                                {!(app.selectedBooks.find(({ title, author, readingLevel }) => title === book.title && author === book.author && readingLevel === book.readingLevel))
                                     ? <Button
                                         size="small"
-                                        onClick={() => handleAddBook(book)}
+                                        onClick={() => app.addBook(book)}
                                     >
                                         Add
                                     </Button>
                                     : <Button
                                         size="small"
                                         color="error"
-                                        onClick={() => handleRemoveBook(book)}
+                                        onClick={() => app.removeBook(book)}
                                     >
                                         Remove
                                     </Button>}

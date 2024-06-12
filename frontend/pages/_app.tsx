@@ -1,6 +1,7 @@
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { IBook } from "../data";
 import React from "react";
+import { AppProvider } from "../contexts/AppContext";
 
 export const theme = createTheme({});
 
@@ -61,6 +62,12 @@ export default function App({ Component, pageProps }) {
     return <ThemeProvider theme={theme}>
         <CssBaseline />
 
-        <Component {...pageProps} />
+        <AppProvider
+            selectedBooks={state.selectedBooks}
+            addBook={handleAddBook}
+            removeBook={handleRemoveBook}
+        >
+            <Component {...pageProps} />
+        </AppProvider>
     </ThemeProvider>;
 }
