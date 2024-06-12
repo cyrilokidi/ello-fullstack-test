@@ -8,7 +8,16 @@ import { IBook } from "../data";
 import React from "react";
 import { AppProvider } from "../contexts/AppContext";
 
-export const theme = createTheme({});
+export const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#5ACCCC",
+        },
+        secondary: {
+            main: "#CFFAFA",
+        }
+    }
+});
 
 export enum EAppStateReducerActionType {
     ADD_BOOK = 'ADD_BOOK',
