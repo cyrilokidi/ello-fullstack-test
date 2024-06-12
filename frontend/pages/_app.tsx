@@ -1,3 +1,8 @@
+import "@fontsource/mulish/300.css";
+import "@fontsource/mulish/400.css";
+import "@fontsource/mulish/500.css";
+import "@fontsource/mulish/700.css";
+
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { IBook } from "../data";
 import React from "react";
