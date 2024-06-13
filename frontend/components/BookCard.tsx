@@ -9,7 +9,7 @@ export interface IBookCardProps {
 }
 
 export const BookCard = (props: IBookCardProps): JSX.Element => {
-    return <Card elevation={3} sx={{ borderRadius: 0 }}>
+    return <Card elevation={3} sx={{ borderRadius: 0, minWidth: 160 }}>
         <CardMedia
             sx={{ height: 140 }}
             image={props.book.coverPhotoURL}
