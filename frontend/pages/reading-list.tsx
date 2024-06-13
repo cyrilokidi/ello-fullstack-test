@@ -1,33 +1,10 @@
 import { Box, Grid, Toolbar } from "@mui/material";
 import React from "react";
-import { IBook, demoBooks } from "../data";
 import { useApp } from "../contexts/AppContext";
 import { BookCard } from "../components/BookCard";
-import { SearchInput } from "../components/SearchInput";
 import { NavigationMenu } from "../components/NavigationMenu";
 
-export interface IUseFetchAllBooks {
-    books: IBook[];
-}
-
-export const useFetchAllBooks = (): IUseFetchAllBooks => {
-    const [books, setBooks] = React.useState<IBook[]>([]);
-
-    const handleSetBook = (books: IBook[]) =>
-        setBooks(books);
-
-    React.useEffect(() => {
-        handleSetBook([...demoBooks])
-    }, []);
-
-    return {
-        books,
-    }
-};
-
 export default function HomePage() {
-    const fetchAllBooks = useFetchAllBooks();
-
     const app = useApp();
 
     return <Box display="flex">
@@ -44,15 +21,10 @@ export default function HomePage() {
             gap={2}
         >
             <Toolbar />
-            <Box>
-                <SearchInput
-                    books={fetchAllBooks.books}
-                />
-            </Box>
 
             <Box>
                 <Grid container spacing={2}>
-                    {fetchAllBooks.books.map((book, index) => <Grid
+                    {app.selectedBooks.map((book, index) => <Grid
                         key={index}
                         item
                         lg={2}
