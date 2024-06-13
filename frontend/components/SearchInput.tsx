@@ -2,13 +2,13 @@ import { Autocomplete, Box, TextField, Typography } from "@mui/material"
 import { IBook } from "../data"
 
 export interface ISearchInputProps {
-    books: IBook[];
+    books?: IBook[];
 }
 
 export const SearchInput = (props: ISearchInputProps): JSX.Element => {
     return <Autocomplete
         sx={{ width: 500 }}
-        options={props.books}
+        options={props.books ? props.books : []}
         getOptionLabel={(book) => book.title}
         renderOption={(props, book) => <Box
             {...props}
