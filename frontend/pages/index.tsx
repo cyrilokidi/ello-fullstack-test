@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, Divider, Drawer, Grid, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Box, Button, Container, Divider, Drawer, Grid, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { IBook, demoBooks } from "../data";
 import { useApp } from "../contexts/AppContext";
@@ -80,10 +80,15 @@ export default function HomePage() {
                 </Typography>
 
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-
                     <Button sx={{ color: '#fff' }}>
-                        Reading List
+                        Home
                     </Button>
+
+                    <Badge badgeContent={6} color="secondary">
+                        <Button sx={{ color: '#fff' }}>
+                            Reading List
+                        </Button>
+                    </Badge>
                 </Box>
             </Toolbar>
         </AppBar>
