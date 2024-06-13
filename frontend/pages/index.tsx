@@ -61,7 +61,7 @@ export default function HomePage() {
     return <Box display="flex">
         <AppBar component="nav">
             <Toolbar>
-                {/* <IconButton
+                <IconButton
                     color="inherit"
                     aria-label="open drawer"
                     edge="start"
@@ -69,7 +69,7 @@ export default function HomePage() {
                     sx={{ mr: 2, display: { sm: 'none' } }}
                 >
                     <MenuIcon />
-                </IconButton> */}
+                </IconButton>
 
                 <Typography
                     variant="h6"
