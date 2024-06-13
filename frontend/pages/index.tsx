@@ -7,6 +7,7 @@ import { SearchInput } from "../components/SearchInput";
 import {
     Menu as MenuIcon,
 } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
 export interface IUseFetchAllBooks {
     books: IBook[];
@@ -39,6 +40,8 @@ export default function HomePage() {
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
+
+    const router = useRouter();
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -80,12 +83,18 @@ export default function HomePage() {
                 </Typography>
 
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                    <Button sx={{ color: '#fff' }}>
+                    <Button
+                        sx={{ color: '#fff' }}
+                        onClick={() => router.push('/')}
+                    >
                         Home
                     </Button>
 
-                    <Badge badgeContent={6} color="secondary">
-                        <Button sx={{ color: '#fff' }}>
+                    <Badge badgeContent={app.selectedBooks.length} color="secondary">
+                        <Button
+                            sx={{ color: '#fff' }}
+                            onClick={() => router.push('/reading-list')}
+                        >
                             Reading List
                         </Button>
                     </Badge>
