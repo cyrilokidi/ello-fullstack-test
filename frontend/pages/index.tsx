@@ -1,7 +1,8 @@
-import { Autocomplete, Box, Button, Card, CardActions, CardContent, Container, Grid, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Container, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { IBook, demoBooks } from "../data";
 import { useApp } from "../contexts/AppContext";
+import { BookCard } from "../components/BookCard";
 
 export interface IUseFetchAllBooks {
     books: IBook[];
@@ -71,34 +72,12 @@ export default function HomePage() {
                         item
                         xs={2}
                     >
-                        <Card>
-                            <CardContent>
-                                <Typography gutterBottom variant="body1" component="div">
-                                    {book.title}
-                                </Typography>
-
-                                <Typography variant="body2" color="text.secondary">
-                                    {`by ${book.author}`}
-                                </Typography>
-                            </CardContent>
-
-                            <CardActions>
-                                {!(app.selectedBooks.find(({ title, author, readingLevel }) => title === book.title && author === book.author && readingLevel === book.readingLevel))
-                                    ? <Button
-                                        size="small"
-                                        onClick={() => app.addBook(book)}
-                                    >
-                                        Add
-                                    </Button>
-                                    : <Button
-                                        size="small"
-                                        color="error"
-                                        onClick={() => app.removeBook(book)}
-                                    >
-                                        Remove
-                                    </Button>}
-                            </CardActions>
-                        </Card>
+                        <BookCard
+                            book={book}
+                            selectedBooks={app.selectedBooks}
+                            onAddBook={app.addBook}
+                            onRemoveBook={app.removeBook}
+                        />
                     </Grid>)}
                 </Grid>
             </Box>
