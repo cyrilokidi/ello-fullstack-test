@@ -7,6 +7,8 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { IBook } from "../data";
 import React from "react";
 import { AppProvider } from "../contexts/AppContext";
+import { ApolloProvider } from "@apollo/client";
+import apolloClient from "../apolloClient";
 
 export const theme = createTheme({
     palette: {
@@ -76,12 +78,14 @@ export default function App({ Component, pageProps }) {
     return <ThemeProvider theme={theme}>
         <CssBaseline />
 
-        <AppProvider
-            selectedBooks={state.selectedBooks}
-            addBook={handleAddBook}
-            removeBook={handleRemoveBook}
-        >
-            <Component {...pageProps} />
-        </AppProvider>
+        <ApolloProvider client={apolloClient}>
+            <AppProvider
+                selectedBooks={state.selectedBooks}
+                addBook={handleAddBook}
+                removeBook={handleRemoveBook}
+            >
+                <Component {...pageProps} />
+            </AppProvider>
+        </ApolloProvider>
     </ThemeProvider>;
 }

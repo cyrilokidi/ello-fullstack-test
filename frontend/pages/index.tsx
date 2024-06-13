@@ -5,12 +5,26 @@ import { useApp } from "../contexts/AppContext";
 import { BookCard } from "../components/BookCard";
 import { SearchInput } from "../components/SearchInput";
 import { NavigationMenu } from "../components/NavigationMenu";
+import { useQuery, gql } from "@apollo/client";
+
+const GET_BOOKS = gql`
+  query GetBooks {
+    books {
+      title
+      author
+      coverPhotoURL
+      readingLevel
+    }
+  }
+`;
 
 export interface IUseFetchAllBooks {
-    books: IBook[];
+    books?: IBook[];
 }
 
 export const useFetchAllBooks = (): IUseFetchAllBooks => {
+    const { loading, error, data } = useQuery(GET_BOOKS);
+
     const [books, setBooks] = React.useState<IBook[]>([]);
 
     const handleSetBook = (books: IBook[]) =>
