@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Typography } from "@mui/material"
 import { IBook } from "../data"
 
 export interface IBookCardProps {
@@ -16,9 +16,19 @@ export const BookCard = (props: IBookCardProps): JSX.Element => {
         />
 
         <CardContent>
-            <Typography gutterBottom variant="body1" component="div">
-                {props.book.title}
-            </Typography>
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 0.5,
+                }}
+            >
+                <Typography gutterBottom variant="body1" component="div">
+                    {props.book.title}
+                </Typography>
+
+                <Chip color="secondary" size="small" label={props.book.readingLevel} />
+            </Box>
 
             <Typography variant="body2" color="text.secondary">
                 {`by ${props.book.author}`}
