@@ -5,23 +5,8 @@ import { useApp } from "../contexts/AppContext";
 import { BookCard } from "../components/BookCard";
 import { SearchInput } from "../components/SearchInput";
 
-export enum EFetchAllBooksSortOrder {
-    ['asc'] = 'asc',
-    ['desc'] = 'desc',
-}
-
-export enum EFetchAllBooksSortField {
-    ['title'] = 'title',
-    ['author'] = 'author',
-    ['readingLevel'] = 'readingLevel',
-}
-
 export interface IUseFetchAllBooks {
     books: IBook[];
-    field: EFetchAllBooksSortField;
-    handleChangeField: (field: EFetchAllBooksSortField) => void;
-    order: EFetchAllBooksSortOrder;
-    handleChangeOrder: (order: EFetchAllBooksSortOrder) => void;
 }
 
 export const useFetchAllBooks = (): IUseFetchAllBooks => {
@@ -30,28 +15,12 @@ export const useFetchAllBooks = (): IUseFetchAllBooks => {
     const handleSetBook = (books: IBook[]) =>
         setBooks(books);
 
-    const [field, setField] = React.useState<EFetchAllBooksSortField>(EFetchAllBooksSortField.title);
-
-    const handleChangeField = (field: EFetchAllBooksSortField): void =>
-        setField(field);
-
-    const [order, setOrder] = React.useState<EFetchAllBooksSortOrder>(EFetchAllBooksSortOrder.desc);
-
-    const handleChangeOrder = (order: EFetchAllBooksSortOrder): void =>
-        setOrder(order);
-
     React.useEffect(() => {
-        (order === EFetchAllBooksSortOrder.desc)
-            ? handleSetBook([...demoBooks].sort((a, b) => b.title.localeCompare(a.title)))
-            : handleSetBook([...demoBooks].sort((a, b) => a.title.localeCompare(b.title)))
+        handleSetBook([...demoBooks])
     }, []);
 
     return {
         books,
-        field,
-        handleChangeField,
-        order,
-        handleChangeOrder,
     }
 };
 
