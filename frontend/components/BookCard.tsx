@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, Typography } from "@mui/material"
+import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
 import { IBook } from "../data"
 
 export interface IBookCardProps {
@@ -10,6 +10,11 @@ export interface IBookCardProps {
 
 export const BookCard = (props: IBookCardProps): JSX.Element => {
     return <Card>
+        <CardMedia
+            sx={{ height: 140 }}
+            image={props.book.coverPhotoURL}
+        />
+
         <CardContent>
             <Typography gutterBottom variant="body1" component="div">
                 {props.book.title}
